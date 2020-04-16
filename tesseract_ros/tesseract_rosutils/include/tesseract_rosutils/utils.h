@@ -368,7 +368,7 @@ static inline bool toMsg(tesseract_msgs::msg::Geometry& geometry_msgs, const tes
       const tesseract_geometry::Octree& octree = static_cast<const tesseract_geometry::Octree&>(geometry);
 
       geometry_msgs.type = tesseract_msgs::msg::Geometry::OCTREE;
-      octomap_msgs::fullMapToMsg(*(octree.getOctree()), geometry_msgs.octomap);
+//      octomap_msgs::fullMapToMsg(*(octree.getOctree()), geometry_msgs.octomap);
       break;
     }
     case tesseract_geometry::GeometryType::MESH:
@@ -600,12 +600,12 @@ static inline bool fromMsg(tesseract_geometry::Geometry::Ptr& geometry, const te
     else
       geometry = tesseract_geometry::SDFMesh::Ptr(new tesseract_geometry::SDFMesh(vertices, faces));
   }
-  else if (geometry_msg.type == tesseract_msgs::msg::Geometry::OCTREE)
-  {
-    std::shared_ptr<octomap::OcTree> om(static_cast<octomap::OcTree*>(octomap_msgs::msgToMap(geometry_msg.octomap)));
-    geometry = tesseract_geometry::Geometry::Ptr(new tesseract_geometry::Octree(
-        om, tesseract_geometry::Octree::SubType::BOX));  // TODO: Need to include SubShapeType in message
-  }
+//  else if (geometry_msg.type == tesseract_msgs::msg::Geometry::OCTREE)
+//  {
+//    std::shared_ptr<octomap::OcTree> om(static_cast<octomap::OcTree*>(octomap_msgs::msgToMap(geometry_msg.octomap)));
+//    geometry = tesseract_geometry::Geometry::Ptr(new tesseract_geometry::Octree(
+//        om, tesseract_geometry::Octree::SubType::BOX));  // TODO: Need to include SubShapeType in message
+//  }
 
   // BUG: Should report an error here
 //  if (geometry == nullptr)
